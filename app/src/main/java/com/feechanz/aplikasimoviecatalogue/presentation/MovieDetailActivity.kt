@@ -1,9 +1,10 @@
-package com.feechanz.aplikasimoviecatalogue
+package com.feechanz.aplikasimoviecatalogue.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
+import com.feechanz.aplikasimoviecatalogue.R
 import com.feechanz.aplikasimoviecatalogue.model.Movie
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
@@ -31,6 +32,10 @@ class MovieDetailActivity : AppCompatActivity() {
         movie = intent.getParcelableExtra(MOVIE_KEY) as Movie
         Picasso.get().load(movie.photoUrl).into(photoImageView)
         titleTextView.text = movie.name
+        var kindOf = getString(R.string.show)
+        if(movie.isMovie) kindOf = getString(R.string.movie)
+
+        kindOfTextView.text = getString(R.string.kind_of, kindOf)
         descriptionTextView.text = movie.description
     }
 

@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Aplikasi Movie Catalogue</string>
+    <string name="app_name">Movie Catalogue Application</string>
 
     <string name="movie">Movie</string>
     <string name="show">Show</string>

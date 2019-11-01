@@ -10,5 +10,6 @@ import kotlinx.android.parcel.Parcelize
 data class Movie(
     var photoUrl : String,
     var name: String,
-    var description: String
+    var description: String?,
+    var isMovie: Boolean
 ) : Parcelable
