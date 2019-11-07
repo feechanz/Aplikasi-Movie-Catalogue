@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.feechanz.aplikasimoviecatalogue.R
 import com.feechanz.aplikasimoviecatalogue.adapter.MovieListViewAdapter
 import com.feechanz.aplikasimoviecatalogue.data.MovieRepository
-import com.feechanz.aplikasimoviecatalogue.model.Movie
+import com.feechanz.aplikasimoviecatalogue.data.model.MovieShow
 import com.feechanz.aplikasimoviecatalogue.presentation.MovieDetailActivity
 
 /**
@@ -56,9 +56,8 @@ class MovieFragment : Fragment(), MovieContract.View{
         rvMovies.adapter = adapter
 
         adapter.onMovieClick = object : MovieListViewAdapter.OnMovieClick {
-            override fun onClick(movie: Movie) {
+            override fun onClick(movie: MovieShow) {
                 val intent = Intent(context, MovieDetailActivity::class.java)
-                intent.putExtra(MovieDetailActivity.MOVIE_KEY, movie)
                 startActivity(intent)
             }
         }
@@ -68,7 +67,7 @@ class MovieFragment : Fragment(), MovieContract.View{
         presenter.loadMovie()
     }
 
-    override fun showMovies(movies: ArrayList<Movie>) {
+    override fun showMovies(movies: ArrayList<MovieShow>) {
         adapter.addAll(movies)
     }
 }

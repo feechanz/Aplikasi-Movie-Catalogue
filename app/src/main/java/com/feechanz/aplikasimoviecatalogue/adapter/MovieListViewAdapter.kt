@@ -1,6 +1,5 @@
 package com.feechanz.aplikasimoviecatalogue.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.feechanz.aplikasimoviecatalogue.R
-import com.feechanz.aplikasimoviecatalogue.model.Movie
+import com.feechanz.aplikasimoviecatalogue.data.model.MovieShow
+import com.feechanz.aplikasimoviecatalogue.utils.Constant
 import com.squareup.picasso.Picasso
 
 /**
@@ -17,9 +17,9 @@ import com.squareup.picasso.Picasso
 
 class MovieListViewAdapter() : RecyclerView
 .Adapter<MovieListViewAdapter.ViewHolder>(){
-    private var movies = arrayListOf<Movie>()
+    private var movies = arrayListOf<MovieShow>()
 
-    fun addAll(movies: ArrayList<Movie>){
+    fun addAll(movies: ArrayList<MovieShow>){
         this.movies.clear()
         this.movies.addAll(movies)
         notifyDataSetChanged()
@@ -45,16 +45,18 @@ class MovieListViewAdapter() : RecyclerView
         private val nameTextView: TextView = view.findViewById(R.id.nameTextView)
         private val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
 
-        internal fun bind(movie: Movie){
-            Picasso.get().load(movie.photoUrl).into(photoImageView)
-            nameTextView.text = movie.name
-            descriptionTextView.text = movie.description
+        internal fun bind(movie: MovieShow){
+            Picasso.get()
+                .load(Constant.getPictureFullPath() + movie.posterPath)
+                .into(photoImageView)
+            nameTextView.text = movie.title
+            descriptionTextView.text = movie.overview
 
             rootLayout.setOnClickListener { onMovieClick?.onClick(movie) }
         }
     }
 
     interface OnMovieClick{
-        fun onClick(movie: Movie)
+        fun onClick(movie: MovieShow)
     }
 }

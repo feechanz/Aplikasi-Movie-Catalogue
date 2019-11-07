@@ -49,7 +49,7 @@
         app:layout_constraintVertical_bias="0.1"/>
 
     <TextView
-        android:id="@+id/kindOfTextView"
+        android:id="@+id/voteAverageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -72,7 +72,7 @@
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         app:layout_constraintEnd_toEndOf="@+id/rightGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/kindOfTextView"
+        app:layout_constraintTop_toBottomOf="@+id/voteAverageTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.1"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

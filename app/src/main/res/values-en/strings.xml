@@ -6,27 +6,6 @@
     <string name="show">Show</string>
 
     <string name="kind_of">Kind of: %1$s</string>
+    <string name="vote_average">Vote Average: %1$f</string>
     <string name="change_language_settings">Change Language Settings</string>
-
-    <string name="movie1">The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.</string>
-    <string name="movie2">T"'"Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country"'"s past.</string>
-    <string name="movie3">Foul-mouthed mutant mercenary Wade Wilson (a.k.a. Deadpool), brings together a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal, time-traveling cyborg Cable.</string>
-    <string name="movie4">When the island"'"s dormant volcano begins roaring to life, Owen and Claire mount a campaign to rescue the remaining dinosaurs from this extinction-level event.</string>
-    <string name="movie5">A group of scientists exploring the Marianas Trench encounter the largest marine predator that has ever existed - the Megalodon.</string>
-    <string name="movie6">A failed reporter is bonded to an alien entity, one of many symbiotes who have invaded Earth. But the being takes a liking to Earth and decides to protect it.</string>
-    <string name="movie7">Ethan Hunt and his IMF team, along with some familiar allies, race against time after a mission gone wrong.</string>
-    <string name="movie8">When the creator of a virtual reality called the OASIS dies, he makes a posthumous challenge to all OASIS users to find his Easter Egg, which will give the finder his fortune and control of his world.</string>
-    <string name="movie9">The Incredibles hero family takes on a new mission, which involves a change in family roles: Bob Parr (Mr Incredible) must manage the house while his wife Helen (Elastigirl) goes out to save the world.</string>
-    <string name="movie10">The story of the legendary British rock band Queen and lead singer Freddie Mercury, leading up to their famous performance at Live Aid (1985).</string>
-
-    <string name="show1">New Jersey mob boss Tony Soprano deals with personal and professional issues in his home and business life that affect his mental state, leading him to seek professional psychiatric counseling.</string>
-    <string name="show2">Nine noble families fight for control over the mythical lands of Westeros, while an ancient enemy returns after being dormant for thousands of years.</string>
-    <string name="show3">The Baltimore drug scene, as seen through the eyes of drug dealers and law enforcement.</string>
-    <string name="show4">By day, mild-mannered Dexter is a blood-spatter analyst for the Miami police. But at night, he is a serial killer who only targets other murderers.</string>
-    <string name="show5">A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family"'"s future.</string>
-    <string name="show6">Sheriff Deputy Rick Grimes wakes up from a coma to learn the world is in ruins, and must lead a group of survivors to stay alive.</string>
-    <string name="show7">An Atlantic City politician plays both sides of the law by conspiring with gangsters during the Prohibition era.</string>
-    <string name="show8">A down-to-earth account of the lives of both illustrious and ordinary Romans set in the last days of the Roman Republic.</string>
-    <string name="show9">A drama about one of New York"'"s most prestigious ad agencies at the beginning of the 1960s, focusing on one of the firm"'"s most mysterious but extremely talented ad executives, Donald Draper.</string>
-    <string name="show10">A biker struggles to balance being a father and being involved in an outlaw motorcycle club.</string>
 </resources>

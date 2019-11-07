@@ -6,27 +6,6 @@
     <string name="show">Pertunjukan</string>
 
     <string name="kind_of">Jenis : %1$s</string>
+    <string name="vote_average">Rata-Rata Suara : %1$f</string>
     <string name="change_language_settings">Ganti Pengaturan Bahasa</string>
-
-    <string name="movie1">The Avengers dan sekutu mereka harus rela mengorbankan semua dalam upaya untuk mengalahkan Thanos yang kuat sebelum kehancuran dan kehancurannya mengakhiri alam semesta.</string>
-    <string name="movie2">T"'"Challa, pewaris kerajaan Wakanda yang tersembunyi namun maju, harus melangkah maju untuk memimpin rakyatnya menuju masa depan yang baru dan harus menghadapi penantang dari masa lalu negaranya.</string>
-    <string name="movie3">Tentara bayaran mutan bermulut kotor Wade Wilson (a.k. Deadpool), menyatukan tim sesama penjahat mutan untuk melindungi seorang anak muda dengan kemampuan supranatural dari kabel cyborg yang brutal dan bepergian waktu.</string>
-    <string name="movie4">Ketika gunung berapi aktif di pulau itu mulai menderu untuk hidup, Owen dan Claire melakukan kampanye untuk menyelamatkan dinosaurus yang tersisa dari peristiwa tingkat kepunahan ini.</string>
-    <string name="movie5">Sekelompok ilmuwan yang menjelajahi Palung Marianas menghadapi predator laut terbesar yang pernah ada - Megalodon.</string>
-    <string name="movie6">Seorang reporter yang gagal terikat pada entitas asing, salah satu dari banyak simbiot yang telah menginvasi Bumi. Tetapi makhluk itu menyukai Bumi dan memutuskan untuk melindunginya.</string>
-    <string name="movie7">Ethan Hunt dan tim IMF-nya, bersama dengan beberapa sekutu yang akrab, berpacu dengan waktu setelah misi salah.</string>
-    <string name="movie8">Ketika pencipta realitas virtual bernama OASIS mati, ia membuat tantangan anumerta bagi semua pengguna OASIS untuk menemukan Telur Paskahnya, yang akan memberi penemu kekayaan dan kontrol dunianya.</string>
-    <string name="movie9">Keluarga pahlawan Incredibles melakukan misi baru, yang melibatkan perubahan peran keluarga: Bob Parr (Tuan Luar Biasa) harus mengelola rumah sementara istrinya Helen (Elastigirl) keluar untuk menyelamatkan dunia.</string>
-    <string name="movie10">Kisah band rock legendaris Inggris Queen dan vokalis Freddie Mercury, yang mengarah ke penampilan terkenal mereka di Live Aid (1985).</string>
-
-    <string name="show1">Bos massa New Jersey, Tony Soprano, menangani masalah pribadi dan profesional di rumah dan kehidupan bisnisnya yang memengaruhi kondisi mentalnya, membawanya untuk mencari konseling psikiatris profesional.</string>
-    <string name="show2">Sembilan keluarga bangsawan berjuang untuk menguasai tanah mitos Westeros, sementara musuh kuno kembali setelah tidak aktif selama ribuan tahun.</string>
-    <string name="show3">Adegan narkoba Baltimore, seperti yang terlihat melalui mata pengedar narkoba dan penegak hukum.</string>
-    <string name="show4">Pada siang hari, Dexter yang santun adalah seorang analis percikan darah untuk polisi Miami. Tapi di malam hari, dia adalah pembunuh berantai yang hanya menargetkan pembunuh lainnya.</string>
-    <string name="show5">Seorang guru kimia SMA didiagnosis mengidap kanker paru-paru yang tidak dapat dioperasi beralih ke memproduksi dan menjual metamfetamin untuk mengamankan masa depan keluarganya.</string>
-    <string name="show6">Wakil Sheriff Rick Grimes bangun dari koma untuk mengetahui bahwa dunia ini hancur, dan harus memimpin sekelompok orang yang selamat untuk tetap hidup.</string>
-    <string name="show7">Seorang politisi Atlantic City memainkan kedua sisi hukum dengan berkonspirasi dengan gangster selama era Larangan.</string>
-    <string name="show8">Kisah sederhana tentang kehidupan orang-orang Romawi yang termasyhur dan biasa-biasa saja yang terjadi pada hari-hari terakhir Republik Romawi.</string>
-    <string name="show9">Sebuah drama tentang salah satu biro iklan paling bergengsi di New York pada awal 1960-an, dengan fokus pada salah satu eksekutif iklan paling misterius namun sangat berbakat, Donald Draper.</string>
-    <string name="show10">Seorang pengendara motor berjuang untuk menyeimbangkan menjadi seorang ayah dan terlibat dalam klub motor yang melanggar hukum.</string>
 </resources>

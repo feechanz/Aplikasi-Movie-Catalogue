@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import com.feechanz.aplikasimoviecatalogue.R
-import com.feechanz.aplikasimoviecatalogue.model.Movie
+import com.feechanz.aplikasimoviecatalogue.data.model.MovieShow
+import com.feechanz.aplikasimoviecatalogue.utils.Constant
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
@@ -14,7 +15,7 @@ class MovieDetailActivity : AppCompatActivity() {
         const val MOVIE_KEY = "movie_key"
     }
 
-    lateinit var movie: Movie
+    lateinit var movie: MovieShow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +30,14 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun initData(){
-        movie = intent.getParcelableExtra(MOVIE_KEY) as Movie
-        Picasso.get().load(movie.photoUrl).into(photoImageView)
-        titleTextView.text = movie.name
-        var kindOf = getString(R.string.show)
-        if(movie.isMovie) kindOf = getString(R.string.movie)
 
-        kindOfTextView.text = getString(R.string.kind_of, kindOf)
-        descriptionTextView.text = movie.description
+        Picasso.get()
+            .load(Constant.getPictureFullPath() + movie.posterPath)
+            .into(photoImageView)
+        titleTextView.text = movie.title
+
+        voteAverageTextView.text = getString(R.string.vote_average, movie.voteAverage)
+        descriptionTextView.text = movie.overview
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
