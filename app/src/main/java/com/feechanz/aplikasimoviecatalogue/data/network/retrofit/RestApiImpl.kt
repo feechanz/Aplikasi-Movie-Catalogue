@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by Feechan on 11/8/2019.
  */
-class RestApiImpl(): RestApi{
+class RestApiImpl: RestApi{
     private lateinit var apiService: RetrofitRestApi
 
     init {
@@ -23,8 +23,8 @@ class RestApiImpl(): RestApi{
     }
 
     fun buildRetrofit(){
-        var gson = GsonBuilder().create()
-        var retrofit = Retrofit.Builder()
+        val gson = GsonBuilder().create()
+        val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
             .baseUrl(Constant.getServerFullUrl())
             .client(createHttpClient())
@@ -33,12 +33,14 @@ class RestApiImpl(): RestApi{
         apiService = retrofit.create(RetrofitRestApi::class.java)
     }
 
-    override fun getMovies(url: String, apiKey:String): Response<ListResponse<MovieResponse>> {
-        return apiService.getMovies(url, apiKey).execute()
+    override fun getMovies(url: String, apiKey:String, languageCode: String):
+            Response<ListResponse<MovieResponse>> {
+        return apiService.getMovies(url, apiKey, languageCode).execute()
     }
 
-    override fun getTvShows(url: String, apiKey:String): Response<ListResponse<TvShowResponse>> {
-        return apiService.getTvShows(url, apiKey).execute()
+    override fun getTvShows(url: String, apiKey:String, languageCode: String):
+            Response<ListResponse<TvShowResponse>> {
+        return apiService.getTvShows(url, apiKey, languageCode).execute()
     }
 
     private fun createHttpClient(): OkHttpClient {

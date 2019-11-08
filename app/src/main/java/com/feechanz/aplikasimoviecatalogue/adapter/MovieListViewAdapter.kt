@@ -19,7 +19,7 @@ class MovieListViewAdapter() : RecyclerView
 .Adapter<MovieListViewAdapter.ViewHolder>(){
     private var movies = arrayListOf<MovieShow>()
 
-    fun addAll(movies: ArrayList<MovieShow>){
+    fun addAll(movies: List<MovieShow>){
         this.movies.clear()
         this.movies.addAll(movies)
         notifyDataSetChanged()

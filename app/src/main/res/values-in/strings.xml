@@ -5,7 +5,10 @@
     <string name="movie">Film</string>
     <string name="show">Pertunjukan</string>
 
+    <string name="language_code">id-ID</string>
+
+    <string name="release_date">Tanggal Peluncuran: %1$s</string>
     <string name="kind_of">Jenis : %1$s</string>
-    <string name="vote_average">Rata-Rata Suara : %1$f</string>
+    <string name="vote_average">Rata-Rata Suara : %1$,.2f</string>
     <string name="change_language_settings">Ganti Pengaturan Bahasa</string>
 </resources>

@@ -4,7 +4,10 @@
     <string name="movie">Movie</string>
     <string name="show">Show</string>
 
+    <string name="language_code">en-US</string>
+
+    <string name="release_date">Release Date: %1$s</string>
     <string name="kind_of">Kind of: %1$s</string>
-    <string name="vote_average">Vote Average: %1$f</string>
+    <string name="vote_average">Vote Average: %1$,.2f</string>
     <string name="change_language_settings">Change Language Settings</string>
 </resources>

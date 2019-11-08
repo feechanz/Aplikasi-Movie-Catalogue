@@ -16,11 +16,13 @@ import retrofit2.http.Url
 interface RetrofitRestApi{
     @Headers(Constant.REQUEST_HEADER_CONTENT_TYPE)
     @GET
-    fun getMovies(@Url url: String, @Query("api_key") apiKey: String):
+    fun getMovies(@Url url: String, @Query("api_key") apiKey: String,
+                  @Query("language") languageCode: String):
             Call<ListResponse<MovieResponse>>
 
     @Headers(Constant.REQUEST_HEADER_CONTENT_TYPE)
     @GET
-    fun getTvShows(@Url url:String, @Query("api_key") apiKey: String):
+    fun getTvShows(@Url url:String, @Query("api_key") apiKey: String,
+                   @Query("language") languageCode: String):
             Call<ListResponse<TvShowResponse>>
 }

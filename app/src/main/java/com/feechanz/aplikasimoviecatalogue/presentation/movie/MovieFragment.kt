@@ -2,51 +2,53 @@ package com.feechanz.aplikasimoviecatalogue.presentation.movie
 
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.feechanz.aplikasimoviecatalogue.R
 import com.feechanz.aplikasimoviecatalogue.adapter.MovieListViewAdapter
-import com.feechanz.aplikasimoviecatalogue.data.MovieRepository
+import com.feechanz.aplikasimoviecatalogue.base.BaseFragment
 import com.feechanz.aplikasimoviecatalogue.data.model.MovieShow
 import com.feechanz.aplikasimoviecatalogue.presentation.MovieDetailActivity
 
 /**
  * A simple [Fragment] subclass.
  */
-class MovieFragment : Fragment(), MovieContract.View{
+class MovieFragment : BaseFragment(){
     private lateinit var adapter: MovieListViewAdapter
-    private lateinit var presenter: MovieContract.Presenter
+    private lateinit var movieViewModel: MovieViewModel
 
     private lateinit var rvMovies: RecyclerView
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_movie, container, false)
-        setup(view)
-        return view
+    override fun getContentView(): Int {
+        return R.layout.fragment_movie
     }
 
-    private fun setup(view: View) {
+    override fun setup(view: View) {
         initView(view)
-        initPresenter()
+        initViewModel()
         initRecyclerView()
-        initData()
     }
 
     private fun initView(view: View){
         rvMovies = view.findViewById(R.id.rvMovies)
+        progressBar = view.findViewById(R.id.progressBar)
     }
 
-    private fun initPresenter(){
-        presenter = MoviePresenter(this, MovieRepository(context))
+    private fun initViewModel(){
+        showLoadingBar()
+        movieViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
+            .get(MovieViewModel::class.java)
+        movieViewModel.getMovies(getString(R.string.language_code)).observe(this, Observer { movies ->
+            if(movies != null){
+                adapter.addAll(movies)
+                hideLoadingBar()
+            }
+        })
     }
 
     private fun initRecyclerView(){
@@ -58,16 +60,9 @@ class MovieFragment : Fragment(), MovieContract.View{
         adapter.onMovieClick = object : MovieListViewAdapter.OnMovieClick {
             override fun onClick(movie: MovieShow) {
                 val intent = Intent(context, MovieDetailActivity::class.java)
+                intent.putExtra(MovieDetailActivity.MOVIE_KEY, movie)
                 startActivity(intent)
             }
         }
-    }
-
-    fun initData(){
-        presenter.loadMovie()
-    }
-
-    override fun showMovies(movies: ArrayList<MovieShow>) {
-        adapter.addAll(movies)
     }
 }

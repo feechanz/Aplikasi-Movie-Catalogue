@@ -30,12 +30,18 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun initData(){
-
+        movie = intent.getParcelableExtra(MOVIE_KEY) as MovieShow
+        
         Picasso.get()
             .load(Constant.getPictureFullPath() + movie.posterPath)
             .into(photoImageView)
         titleTextView.text = movie.title
-
+        var kindOf = getString(R.string.movie)
+        if(!movie.isMovie){
+            kindOf = getString(R.string.show)
+        }
+        kindOfTextView.text = getString(R.string.kind_of, kindOf)
+        releaseDateTextView.text = getString(R.string.release_date, movie.releaseDate)
         voteAverageTextView.text = getString(R.string.vote_average, movie.voteAverage)
         descriptionTextView.text = movie.overview
     }
