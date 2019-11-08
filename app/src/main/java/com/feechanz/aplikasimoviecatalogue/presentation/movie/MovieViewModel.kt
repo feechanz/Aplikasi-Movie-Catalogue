@@ -10,12 +10,14 @@ import com.feechanz.aplikasimoviecatalogue.utils.Constant
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 /**
  * Created by Feechan on 11/1/2019.
  */
 class MovieViewModel : ViewModel(){
     private var movies: MutableLiveData<List<MovieShow>>? = null
+    private var errorMessage: MutableLiveData<String>? = null
     private var restApi: RestApi = RestApiImpl()
 
     fun getMovies(languageCode: String): LiveData<List<MovieShow>> {
@@ -26,20 +28,32 @@ class MovieViewModel : ViewModel(){
         return movies as MutableLiveData<List<MovieShow>>
     }
 
+    fun getErrorMessage(): LiveData<String>{
+        if(errorMessage == null){
+            errorMessage = MutableLiveData()
+        }
+        return errorMessage as MutableLiveData<String>
+    }
+
     private fun loadMovies(languageCode: String){
+        errorMessage = null
         val moviesResult = arrayListOf<MovieShow>()
 
         CoroutineScope(Dispatchers.IO).launch {
-            val movieResponses = restApi.getMovies(
-                Constant.getEndpointPath(Constant.GET_MOVIES),
-                Constant.API_KEY,
-                languageCode
-            )
-            if (movieResponses.isSuccessful) {
-                movieResponses.body().results?.map { m ->
-                    moviesResult.add(MovieShow.getInstance(m))
+            try {
+                val movieResponses = restApi.getMovies(
+                    Constant.getEndpointPath(Constant.GET_MOVIES),
+                    Constant.API_KEY,
+                    languageCode
+                )
+                if (movieResponses.isSuccessful) {
+                    movieResponses.body().results?.map { m ->
+                        moviesResult.add(MovieShow.getInstance(m))
+                    }
+                    movies?.postValue(moviesResult)
                 }
-                movies?.postValue(moviesResult)
+            }catch (ex: Exception){
+                errorMessage?.postValue(ex.message)
             }
         }
 

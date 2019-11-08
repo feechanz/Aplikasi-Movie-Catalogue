@@ -4,6 +4,7 @@ package com.feechanz.aplikasimoviecatalogue.presentation.show
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,9 +45,16 @@ class ShowFragment : BaseFragment() {
         showViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
             .get(ShowViewModel::class.java)
         showViewModel.getMovies(getString(R.string.language_code)).observe(this, Observer { shows ->
+            hideLoadingBar()
             if (shows != null) {
                 adapter.addAll(shows)
-                hideLoadingBar()
+            }
+        })
+
+        showViewModel.getErrorMessage().observe(this, Observer { errorMessage ->
+            hideLoadingBar()
+            if(errorMessage != null){
+                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
             }
         })
     }
