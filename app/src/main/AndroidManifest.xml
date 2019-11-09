@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.feechanz.aplikasimoviecatalogue">
 
+    <permission
+        android:name="com.feechanz.aplikasimoviecatalogue"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.feechanz.aplikasimoviecatalogue"
+        android:protectionLevel="normal" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,14 +18,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.detail.MovieDetailActivity"></activity>
+        <activity android:name=".presentation.detail.MovieDetailActivity" />
         <activity android:name=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <provider
+            android:name=".data.provider.MovieFavoriteContentProvider"
+            android:authorities="com.feechanz.aplikasimoviecatalogue"
+            android:enabled="true"
+            android:exported="true" />
+    </application>
 </manifest>

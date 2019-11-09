@@ -11,6 +11,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.feechanz.aplikasimoviecatalogue.R
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,13 +21,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initNavigation()
+        initRealm()
+    }
+
+    private fun initRealm() {
+        Realm.init(this)
+
+        val realmConfiguration = RealmConfiguration.Builder()
+            .build()
+
+        Realm.setDefaultConfiguration(realmConfiguration)
     }
 
     private fun initNavigation() {
         val navController = findNavController(R.id.navigationHostFragment)
 
         val appBarConfiguration = AppBarConfiguration.Builder(
-            R.id.navigation_movie, R.id.navigation_show
+            R.id.navigation_movie, R.id.navigation_show, R.id.navigation_favorite
         ).build()
 
         setupActionBarWithNavController(navController, appBarConfiguration)

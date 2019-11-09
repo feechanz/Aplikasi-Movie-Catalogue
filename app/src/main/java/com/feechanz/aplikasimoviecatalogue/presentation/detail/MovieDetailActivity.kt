@@ -1,11 +1,13 @@
 package com.feechanz.aplikasimoviecatalogue.presentation.detail
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.feechanz.aplikasimoviecatalogue.R
@@ -20,7 +22,9 @@ class MovieDetailActivity : AppCompatActivity() {
         const val MOVIE_KEY = "movie_key"
     }
 
-    lateinit var movie: MovieShow
+    private var isFavorite: Boolean = false
+    private var menuItem: Menu? = null
+    private lateinit var movie: MovieShow
     private lateinit var movieViewModel: MovieDetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +55,7 @@ class MovieDetailActivity : AppCompatActivity() {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
             }
         })
+
     }
 
     private fun showLoadingBar() {
@@ -86,8 +91,42 @@ class MovieDetailActivity : AppCompatActivity() {
         descriptionTextView.text = movieDetail.overview
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        finish()
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.movie_detail_menu, menu)
+        menuItem = menu
+        movieViewModel.getFavorite(movie.id, movie.isMovie).observe(this, Observer { favorite ->
+            if (favorite != null) {
+                setFavorite(favorite)
+            }
+        })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            R.id.add_to_favorite -> {
+                if (!isFavorite) {
+                    movieViewModel.addFavorite(movie)
+                } else {
+                    movieViewModel.removeMovie(movie.id, movie.isMovie)
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun setFavorite(isFavorite: Boolean) {
+        this.isFavorite = isFavorite
+        if (isFavorite)
+            menuItem?.getItem(0)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_favorite_black)
+        else
+            menuItem?.getItem(0)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_black)
     }
 }

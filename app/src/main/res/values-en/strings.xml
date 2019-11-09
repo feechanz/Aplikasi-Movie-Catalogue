@@ -5,6 +5,7 @@
     <string name="movie">Movie</string>
     <string name="show">Show</string>
     <string name="picture">Picture</string>
+    <string name="favorite">Favorite</string>
 
     <string name="language_code">en-US</string>
 

@@ -17,4 +17,9 @@
         android:label="@string/show"
         tools:layout="@layout/fragment_show" />
 
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:name="com.feechanz.aplikasimoviecatalogue.presentation.favorite.FavoriteFragment"
+        android:label="@string/favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

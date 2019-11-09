@@ -14,4 +14,11 @@
         android:icon="@drawable/ic_tv_black_24dp"
         android:title="@string/show"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/navigation_favorite"
+        android:enabled="true"
+        android:icon="@drawable/ic_favorite_black"
+        android:title="@string/favorite"
+        app:showAsAction="ifRoom" />
 </menu>
