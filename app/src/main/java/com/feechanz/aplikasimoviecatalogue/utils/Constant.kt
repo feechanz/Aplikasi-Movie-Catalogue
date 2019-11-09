@@ -3,7 +3,7 @@ package com.feechanz.aplikasimoviecatalogue.utils
 /**
  * Created by Feechan on 11/7/2019.
  */
-class Constant() {
+class Constant {
     companion object {
         const val CONNECTION_TIMEOUT:Long = 60
         const val READ_TIMEOUT:Long = 60

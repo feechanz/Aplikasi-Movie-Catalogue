@@ -57,7 +57,7 @@ class RestApiImpl: RestApi{
 
     private fun setLogger(okHttpClientBuilder: OkHttpClient.Builder) {
         val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        logging.level = HttpLoggingInterceptor.Level.BODY
         okHttpClientBuilder.addInterceptor(logging)
     }
 }

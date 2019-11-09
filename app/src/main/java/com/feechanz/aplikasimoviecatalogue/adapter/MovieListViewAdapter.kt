@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso
  * Created by Feechan on 10/30/2019.
  */
 
-class MovieListViewAdapter() : RecyclerView
+class MovieListViewAdapter : RecyclerView
 .Adapter<MovieListViewAdapter.ViewHolder>(){
     private var movies = arrayListOf<MovieShow>()
 
