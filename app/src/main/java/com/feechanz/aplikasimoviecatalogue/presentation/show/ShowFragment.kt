@@ -2,19 +2,18 @@ package com.feechanz.aplikasimoviecatalogue.presentation.show
 
 
 import android.content.Intent
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.feechanz.aplikasimoviecatalogue.R
 import com.feechanz.aplikasimoviecatalogue.adapter.MovieListViewAdapter
 import com.feechanz.aplikasimoviecatalogue.base.BaseFragment
 import com.feechanz.aplikasimoviecatalogue.data.model.MovieShow
-import com.feechanz.aplikasimoviecatalogue.presentation.MovieDetailActivity
+import com.feechanz.aplikasimoviecatalogue.presentation.detail.MovieDetailActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -53,7 +52,7 @@ class ShowFragment : BaseFragment() {
 
         showViewModel.getErrorMessage().observe(this, Observer { errorMessage ->
             hideLoadingBar()
-            if(errorMessage != null){
+            if (errorMessage != null) {
                 Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
             }
         })

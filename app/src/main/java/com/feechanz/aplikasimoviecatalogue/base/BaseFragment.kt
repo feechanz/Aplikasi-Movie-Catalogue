@@ -1,6 +1,5 @@
 package com.feechanz.aplikasimoviecatalogue.base
 
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,7 @@ import androidx.fragment.app.Fragment
 /**
  * Created by Feechan on 11/8/2019.
  */
-abstract class BaseFragment: Fragment(){
+abstract class BaseFragment : Fragment() {
     protected var progressBar: ProgressBar? = null
 
     override fun onCreateView(
@@ -23,6 +22,7 @@ abstract class BaseFragment: Fragment(){
         setup(view)
         return view
     }
+
     abstract fun getContentView(): Int
     abstract fun setup(view: View)
 

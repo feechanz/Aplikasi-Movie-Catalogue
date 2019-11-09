@@ -6,14 +6,14 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by Feechan on 11/8/2019.
  */
-class ListResponse<T>{
+class ListResponse<T> {
     @SerializedName("page")
-    var page:Int? = null
+    var page: Int? = null
     @SerializedName("total_results")
-    var totalResults:Int? = null
+    var totalResults: Int? = null
     @SerializedName("total_pages")
-    var totalPages:Int? = null
+    var totalPages: Int? = null
     @SerializedName("results")
-    var results:List<T>? = null
+    var results: List<T>? = null
 
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".presentation.MovieDetailActivity">
+    tools:context=".presentation.detail.MovieDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,20 +16,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05"/>
+            app:layout_constraintGuide_percent="0.05" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/rightGuideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95"/>
+            app:layout_constraintGuide_percent="0.95" />
 
         <ImageView
             android:id="@+id/photoImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@android:color/darker_gray"
+            android:contentDescription="@string/picture"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -51,24 +52,25 @@
             app:layout_constraintEnd_toEndOf="@+id/rightGuideline"
             app:layout_constraintTop_toBottomOf="@+id/photoImageView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.1"/>
+            app:layout_constraintVertical_bias="0.05" />
 
         <TextView
-            android:id="@+id/releaseDateTextView"
+            android:id="@+id/statusTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:ellipsize="none"
             android:textSize="@dimen/font_size_20"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintEnd_toEndOf="@+id/rightGuideline"
             app:layout_constraintTop_toBottomOf="@+id/titleTextView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.05"/>
+            app:layout_constraintVertical_bias="0.05" />
 
         <TextView
-            android:id="@+id/kindOfTextView"
+            android:id="@+id/releaseDateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -77,12 +79,12 @@
             android:textColor="@android:color/black"
             app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintEnd_toEndOf="@+id/rightGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/releaseDateTextView"
+            app:layout_constraintTop_toBottomOf="@+id/statusTextView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.05"/>
+            app:layout_constraintVertical_bias="0.05" />
 
         <TextView
-            android:id="@+id/voteAverageTextView"
+            android:id="@+id/kindOfTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -91,9 +93,23 @@
             android:textColor="@android:color/black"
             app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintEnd_toEndOf="@+id/rightGuideline"
+            app:layout_constraintTop_toBottomOf="@+id/releaseDateTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <TextView
+            android:id="@+id/voteAverageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:ellipsize="none"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@+id/rightGuideline"
             app:layout_constraintTop_toBottomOf="@+id/kindOfTextView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.05"/>
+            app:layout_constraintVertical_bias="0.05" />
 
         <TextView
             android:id="@+id/descriptionTextView"
@@ -101,12 +117,23 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:ellipsize="none"
-            android:textSize="@dimen/font_size_18"
+            android:textSize="@dimen/font_size_12"
             android:textColor="@android:color/darker_gray"
             app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintEnd_toEndOf="@+id/rightGuideline"
             app:layout_constraintTop_toBottomOf="@+id/voteAverageTextView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.1"/>
+            app:layout_constraintVertical_bias="0.1" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

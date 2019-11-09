@@ -10,32 +10,31 @@ import com.feechanz.aplikasimoviecatalogue.utils.Constant
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 /**
  * Created by Feechan on 11/1/2019.
  */
-class MovieViewModel : ViewModel(){
+class MovieViewModel : ViewModel() {
     private var movies: MutableLiveData<List<MovieShow>>? = null
     private var errorMessage: MutableLiveData<String>? = null
     private var restApi: RestApi = RestApiImpl()
 
     fun getMovies(languageCode: String): LiveData<List<MovieShow>> {
-        if(movies == null){
+        if (movies == null) {
             movies = MutableLiveData()
             loadMovies(languageCode)
         }
         return movies as MutableLiveData<List<MovieShow>>
     }
 
-    fun getErrorMessage(): LiveData<String>{
-        if(errorMessage == null){
+    fun getErrorMessage(): LiveData<String> {
+        if (errorMessage == null) {
             errorMessage = MutableLiveData()
         }
         return errorMessage as MutableLiveData<String>
     }
 
-    private fun loadMovies(languageCode: String){
+    private fun loadMovies(languageCode: String) {
         errorMessage = null
         val moviesResult = arrayListOf<MovieShow>()
 
@@ -52,10 +51,9 @@ class MovieViewModel : ViewModel(){
                     }
                     movies?.postValue(moviesResult)
                 }
-            }catch (ex: Exception){
+            } catch (ex: Exception) {
                 errorMessage?.postValue(ex.message)
             }
         }
-
     }
 }

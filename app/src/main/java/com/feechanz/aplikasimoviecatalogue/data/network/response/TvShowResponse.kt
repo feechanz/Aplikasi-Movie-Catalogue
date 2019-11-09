@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by Feechan on 11/7/2019.
  */
-class TvShowResponse{
+class TvShowResponse {
     @SerializedName("id")
-    var id:Long = 0
+    var id: Long = 0
     @SerializedName("name")
-    var name:String? = null
+    var name: String? = null
     @SerializedName("overview")
-    var overview:String? = null
+    var overview: String? = null
     @SerializedName("first_air_date")
-    var firstAirDate:String? = null
+    var firstAirDate: String? = null
     @SerializedName("poster_path")
-    var posterPath:String? = null
+    var posterPath: String? = null
     @SerializedName("vote_average")
-    var voteAverage:Double = 0.0
+    var voteAverage: Double = 0.0
 }

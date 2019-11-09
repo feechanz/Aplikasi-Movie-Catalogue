@@ -3,11 +3,13 @@ package com.feechanz.aplikasimoviecatalogue.data.network.response
 import com.google.gson.annotations.SerializedName
 
 /**
- * Created by Feechan on 11/7/2019.
+ * Created by Feechan on 11/9/2019.
  */
-class MovieResponse {
+class MovieDetailResponse {
     @SerializedName("id")
     var id: Long = 0
+    @SerializedName("status")
+    var status: String? = null
     @SerializedName("title")
     var title: String? = null
     @SerializedName("overview")

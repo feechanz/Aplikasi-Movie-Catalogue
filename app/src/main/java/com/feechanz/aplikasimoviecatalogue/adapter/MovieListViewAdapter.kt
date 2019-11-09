@@ -16,18 +16,20 @@ import com.squareup.picasso.Picasso
  */
 
 class MovieListViewAdapter : RecyclerView
-.Adapter<MovieListViewAdapter.ViewHolder>(){
+.Adapter<MovieListViewAdapter.ViewHolder>() {
     private var movies = arrayListOf<MovieShow>()
 
-    fun addAll(movies: List<MovieShow>){
+    fun addAll(movies: List<MovieShow>) {
         this.movies.clear()
         this.movies.addAll(movies)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.row_movie_layout, parent,
-            false)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.row_movie_layout, parent,
+            false
+        )
         return ViewHolder(view)
     }
 
@@ -39,13 +41,13 @@ class MovieListViewAdapter : RecyclerView
 
     var onMovieClick: OnMovieClick? = null
 
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val rootLayout: ViewGroup = view.findViewById(R.id.rootLayout)
         private val photoImageView: ImageView = view.findViewById(R.id.photoImageView)
         private val nameTextView: TextView = view.findViewById(R.id.nameTextView)
         private val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
 
-        internal fun bind(movie: MovieShow){
+        internal fun bind(movie: MovieShow) {
             Picasso.get()
                 .load(Constant.getPictureFullPath() + movie.posterPath)
                 .into(photoImageView)
@@ -56,7 +58,7 @@ class MovieListViewAdapter : RecyclerView
         }
     }
 
-    interface OnMovieClick{
+    interface OnMovieClick {
         fun onClick(movie: MovieShow)
     }
 }

@@ -1,8 +1,6 @@
 package com.feechanz.aplikasimoviecatalogue.data.network.retrofit
 
-import com.feechanz.aplikasimoviecatalogue.data.network.response.ListResponse
-import com.feechanz.aplikasimoviecatalogue.data.network.response.MovieResponse
-import com.feechanz.aplikasimoviecatalogue.data.network.response.TvShowResponse
+import com.feechanz.aplikasimoviecatalogue.data.network.response.*
 import com.feechanz.aplikasimoviecatalogue.utils.Constant
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -15,14 +13,15 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by Feechan on 11/8/2019.
  */
-class RestApiImpl: RestApi{
+class RestApiImpl : RestApi {
+
     private lateinit var apiService: RetrofitRestApi
 
     init {
         buildRetrofit()
     }
 
-    fun buildRetrofit(){
+    fun buildRetrofit() {
         val gson = GsonBuilder().create()
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -33,14 +32,30 @@ class RestApiImpl: RestApi{
         apiService = retrofit.create(RetrofitRestApi::class.java)
     }
 
-    override fun getMovies(url: String, apiKey:String, languageCode: String):
+    override fun getMovies(url: String, apiKey: String, languageCode: String):
             Response<ListResponse<MovieResponse>> {
         return apiService.getMovies(url, apiKey, languageCode).execute()
     }
 
-    override fun getTvShows(url: String, apiKey:String, languageCode: String):
+    override fun getTvShows(url: String, apiKey: String, languageCode: String):
             Response<ListResponse<TvShowResponse>> {
         return apiService.getTvShows(url, apiKey, languageCode).execute()
+    }
+
+    override fun getMovieDetail(
+        url: String,
+        apiKey: String,
+        languageCode: String
+    ): Response<MovieDetailResponse> {
+        return apiService.getMovieDetail(url, apiKey, languageCode).execute()
+    }
+
+    override fun getTvShowDetail(
+        url: String,
+        apiKey: String,
+        languageCode: String
+    ): Response<TvShowDetailResponse> {
+        return apiService.getTvShowDetail(url, apiKey, languageCode).execute()
     }
 
     private fun createHttpClient(): OkHttpClient {

@@ -6,12 +6,12 @@
         android:enabled="true"
         android:icon="@drawable/ic_movie_black_24dp"
         android:title="@string/movie"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/navigation_show"
         android:enabled="true"
         android:icon="@drawable/ic_tv_black_24dp"
         android:title="@string/show"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 </menu>

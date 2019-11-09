@@ -1,11 +1,11 @@
 package com.feechanz.aplikasimoviecatalogue.presentation
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         initNavigation()
     }
 
-    private fun initNavigation(){
+    private fun initNavigation() {
         val navController = findNavController(R.id.navigationHostFragment)
 
         val appBarConfiguration = AppBarConfiguration.Builder(
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.action_change_settings){
+        if (item.itemId == R.id.action_change_settings) {
             val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(intent)
         }

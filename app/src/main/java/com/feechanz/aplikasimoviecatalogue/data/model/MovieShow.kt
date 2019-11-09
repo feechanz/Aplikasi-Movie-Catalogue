@@ -10,12 +10,12 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 data class MovieShow(
-    var id:Long,
-    var title:String?,
-    var overview:String?,
-    var releaseDate:String?,
-    var posterPath:String?,
-    var voteAverage:Double,
+    var id: Long,
+    var title: String?,
+    var overview: String?,
+    var releaseDate: String?,
+    var posterPath: String?,
+    var voteAverage: Double,
     var isMovie: Boolean
 ) : Parcelable {
     companion object {
@@ -27,8 +27,10 @@ data class MovieShow(
         }
 
         fun getInstance(show: TvShowResponse): MovieShow {
-            return MovieShow(show.id, show.name, show.overview, show.firstAirDate, show
-                .posterPath, show.voteAverage, false)
+            return MovieShow(
+                show.id, show.name, show.overview, show.firstAirDate, show
+                    .posterPath, show.voteAverage, false
+            )
         }
     }
 }
