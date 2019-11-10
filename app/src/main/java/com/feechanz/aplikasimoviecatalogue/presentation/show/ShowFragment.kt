@@ -2,7 +2,10 @@ package com.feechanz.aplikasimoviecatalogue.presentation.show
 
 
 import android.content.Intent
+import android.os.Bundle
+import android.view.Menu
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,6 +26,37 @@ class ShowFragment : BaseFragment() {
     private lateinit var showViewModel: ShowViewModel
 
     private lateinit var rvShows: RecyclerView
+
+    private var searchView: SearchView? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        searchView = (menu.findItem(R.id.search_view).actionView as SearchView?)
+        searchView?.setOnQueryTextListener(object
+            : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(pattern: String): Boolean {
+                filterMovies(pattern)
+                return true
+            }
+        })
+    }
+
+    private fun filterMovies(filter: String){
+        showViewModel.getShowsFiltered(filter).observe(this, Observer { shows ->
+            if (shows != null) {
+                adapter.addAll(shows)
+            }
+        })
+    }
 
     override fun getContentView(): Int {
         return R.layout.fragment_show
@@ -46,7 +80,11 @@ class ShowFragment : BaseFragment() {
         showViewModel.getMovies(getString(R.string.language_code)).observe(this, Observer { shows ->
             hideLoadingBar()
             if (shows != null) {
-                adapter.addAll(shows)
+                var pattern: String = ""
+                if(searchView!=null){
+                    pattern = searchView?.query.toString()
+                }
+                filterMovies(pattern)
             }
         })
 

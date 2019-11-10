@@ -19,6 +19,7 @@ class ShowViewModel : ViewModel() {
     private var shows: MutableLiveData<List<MovieShow>>? = null
     private var errorMessage: MutableLiveData<String>? = null
     private var restApi: RestApi = RestApiImpl()
+    private var showsFiltered: MutableLiveData<List<MovieShow>>? = null
 
     fun getMovies(languageCode: String): LiveData<List<MovieShow>> {
         if (shows == null) {
@@ -33,6 +34,14 @@ class ShowViewModel : ViewModel() {
             errorMessage = MutableLiveData()
         }
         return errorMessage as MutableLiveData<String>
+    }
+
+    fun getShowsFiltered(pattern: String): LiveData<List<MovieShow>>{
+
+        showsFiltered = MutableLiveData()
+        loadShowsFiltered(pattern)
+
+        return showsFiltered as MutableLiveData<List<MovieShow>>
     }
 
     private fun loadShows(languageCode: String) {
@@ -55,6 +64,17 @@ class ShowViewModel : ViewModel() {
             } catch (ex: Exception) {
                 errorMessage?.postValue(ex.message)
             }
+        }
+    }
+
+    private fun loadShowsFiltered(pattern: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = ArrayList<MovieShow>()
+            shows?.value?.map {m ->
+                if(m.title!!.toLowerCase().contains(pattern.toLowerCase()))
+                    result.add(m)
+            }
+            showsFiltered?.postValue(result)
         }
     }
 }

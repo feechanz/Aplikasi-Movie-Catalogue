@@ -1,5 +1,8 @@
 package com.feechanz.aplikasimoviecatalogue.presentation.favorite
 
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.feechanz.aplikasimoviecatalogue.R
@@ -13,6 +16,12 @@ import com.google.android.material.tabs.TabLayout
 class FavoriteFragment : BaseFragment() {
     private lateinit var viewPager: ViewPager
     private lateinit var tabLayout: TabLayout
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun getContentView(): Int {
         return R.layout.fragment_favorite
     }
@@ -27,10 +36,18 @@ class FavoriteFragment : BaseFragment() {
         tabLayout = view.findViewById(R.id.tabs)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val item  =menu.findItem(R.id.search_view)
+        if(item !=null)
+            item.isVisible = false
+    }
+
 
     private fun initTabLayout() {
         val sectionsPagerAdapter = FavoriteSectionsPagerAdapter(context, childFragmentManager)
         viewPager.adapter = sectionsPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
     }
+
 }

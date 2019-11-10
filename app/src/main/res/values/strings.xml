@@ -5,6 +5,7 @@
     <string name="show">Show</string>
     <string name="picture">Picture</string>
     <string name="favorite">Favorite</string>
+    <string name="search">Search</string>
 
     <string name="language_code">en-US</string>
 
@@ -13,4 +14,7 @@
     <string name="status">Status: %1$s</string>
     <string name="vote_average">Vote Average: %1$,.2f</string>
     <string name="change_language_settings">Change Language Settings</string>
+    <string name="appwidget_text">Favorite Movie</string>
+    <string name="add_widget">Add widget</string>
+    <string name="empty_text">No Favorite</string>
 </resources>

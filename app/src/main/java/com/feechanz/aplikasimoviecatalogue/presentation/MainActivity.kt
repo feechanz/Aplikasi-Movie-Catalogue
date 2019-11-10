@@ -1,5 +1,7 @@
 package com.feechanz.aplikasimoviecatalogue.presentation
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -11,8 +13,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.feechanz.aplikasimoviecatalogue.R
-import io.realm.Realm
-import io.realm.RealmConfiguration
+import com.feechanz.aplikasimoviecatalogue.widget.FavoriteMovieWidget
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,16 +22,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initNavigation()
-        initRealm()
     }
 
-    private fun initRealm() {
-        Realm.init(this)
+    override fun onResume() {
+        super.onResume()
+        notifyWidget()
+    }
 
-        val realmConfiguration = RealmConfiguration.Builder()
-            .build()
-
-        Realm.setDefaultConfiguration(realmConfiguration)
+    private fun notifyWidget(){
+        val appWidgetManager = AppWidgetManager.getInstance(this)
+        val appWidgetIds = appWidgetManager.getAppWidgetIds(
+            ComponentName(this, FavoriteMovieWidget::class.java)
+        )
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.movieStackView)
     }
 
     private fun initNavigation() {

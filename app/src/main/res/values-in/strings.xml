@@ -6,6 +6,7 @@
     <string name="show">Pertunjukan</string>
     <string name="picture">Gambar</string>
     <string name="favorite">Favorit</string>
+    <string name="search">Cari</string>
 
     <string name="language_code">id-ID</string>
 
@@ -14,4 +15,7 @@
     <string name="status">Keadaan: %1$s</string>
     <string name="vote_average">Rata-Rata Suara : %1$,.2f</string>
     <string name="change_language_settings">Ganti Pengaturan Bahasa</string>
+    <string name="appwidget_text">Film Favorit</string>
+    <string name="add_widget">Tambah widget</string>
+    <string name="empty_text">Tidak ada Favorit</string>
 </resources>

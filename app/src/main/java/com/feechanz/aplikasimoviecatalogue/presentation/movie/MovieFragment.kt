@@ -2,7 +2,10 @@ package com.feechanz.aplikasimoviecatalogue.presentation.movie
 
 
 import android.content.Intent
+import android.os.Bundle
+import android.view.Menu
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,6 +26,37 @@ class MovieFragment : BaseFragment() {
     private lateinit var movieViewModel: MovieViewModel
 
     private lateinit var rvMovies: RecyclerView
+
+    private var searchView: SearchView? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        searchView = (menu.findItem(R.id.search_view).actionView as SearchView?)
+        searchView?.setOnQueryTextListener(object
+            : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(pattern: String): Boolean {
+                filterMovies(pattern)
+                return true
+            }
+        })
+    }
+
+    private fun filterMovies(filter: String){
+        movieViewModel.getMoviesFiltered(filter).observe(this, Observer { movies ->
+            if (movies != null) {
+                adapter.addAll(movies)
+            }
+        })
+    }
 
     override fun getContentView(): Int {
         return R.layout.fragment_movie
@@ -47,7 +81,11 @@ class MovieFragment : BaseFragment() {
             .observe(this, Observer { movies ->
                 hideLoadingBar()
                 if (movies != null) {
-                    adapter.addAll(movies)
+                    var pattern: String = ""
+                    if(searchView!=null){
+                        pattern = searchView?.query.toString()
+                    }
+                    filterMovies(pattern)
                 }
             })
         movieViewModel.getErrorMessage().observe(this, Observer { errorMessage ->
