@@ -20,6 +20,8 @@ class Constant {
 
         const val GET_MOVIES = "3/discover/movie"
         const val GET_TV_SHOW = "3/discover/tv"
+        const val GET_MOVIES_SEARCH = "3/search/movie"
+        const val GET_TV_SHOW_SEARCH = "3/search/tv"
         const val GET_MOVIE_DETAIL = "3/movie/"
         const val GET_TV_SHOW_DETAIL = "3/tv/"
         fun getEndpointPath(endpoint: String): String {

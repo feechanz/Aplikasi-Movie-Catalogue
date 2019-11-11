@@ -3,6 +3,7 @@ package com.feechanz.aplikasimoviecatalogue.presentation.show
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Menu
 import android.view.View
 import android.widget.SearchView
@@ -44,14 +45,31 @@ class ShowFragment : BaseFragment() {
             }
 
             override fun onQueryTextChange(pattern: String): Boolean {
-                filterMovies(pattern)
+                if(TextUtils.isEmpty(pattern)){
+                    queryAllShow()
+                }else {
+                    queryShows(pattern)
+                }
                 return true
             }
         })
     }
 
-    private fun filterMovies(filter: String){
-        showViewModel.getShowsFiltered(filter).observe(this, Observer { shows ->
+    private fun queryAllShow(){
+        showLoadingBar()
+        showViewModel.getShows(getString(R.string.language_code)).observe(this, Observer { shows ->
+            hideLoadingBar()
+            if (shows != null) {
+                adapter.addAll(shows)
+            }
+        })
+    }
+
+    private fun queryShows(filter: String){
+        showLoadingBar()
+        showViewModel.getShowsQuery(getString(R.string.language_code), filter).observe(this,
+            Observer { shows ->
+                hideLoadingBar()
             if (shows != null) {
                 adapter.addAll(shows)
             }
@@ -77,14 +95,18 @@ class ShowFragment : BaseFragment() {
         showLoadingBar()
         showViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
             .get(ShowViewModel::class.java)
-        showViewModel.getMovies(getString(R.string.language_code)).observe(this, Observer { shows ->
+        showViewModel.getShows(getString(R.string.language_code)).observe(this, Observer { shows ->
             hideLoadingBar()
             if (shows != null) {
                 var pattern: String = ""
                 if(searchView!=null){
                     pattern = searchView?.query.toString()
                 }
-                filterMovies(pattern)
+                if(TextUtils.isEmpty(pattern)){
+                    adapter.addAll(shows)
+                }else {
+                    queryShows(pattern)
+                }
             }
         })
 

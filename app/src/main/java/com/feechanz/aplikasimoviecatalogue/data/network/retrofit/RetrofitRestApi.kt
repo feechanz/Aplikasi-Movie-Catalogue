@@ -22,6 +22,15 @@ interface RetrofitRestApi {
 
     @Headers(Constant.REQUEST_HEADER_CONTENT_TYPE)
     @GET
+    fun getMoviesReleaseToday(
+        @Url url: String, @Query("api_key") apiKey: String,
+        @Query("primary_release_date.gte") todayDate: String,
+        @Query("primary_release_date.lte") todayDate2: String
+    ):
+            Call<ListResponse<MovieResponse>>
+
+    @Headers(Constant.REQUEST_HEADER_CONTENT_TYPE)
+    @GET
     fun getTvShows(
         @Url url: String, @Query("api_key") apiKey: String,
         @Query("language") languageCode: String
@@ -43,4 +52,22 @@ interface RetrofitRestApi {
         @Query("language") languageCode: String
     ):
             Call<TvShowDetailResponse>
+
+    @Headers(Constant.REQUEST_HEADER_CONTENT_TYPE)
+    @GET
+    fun getMoviesSearch(
+        @Url url: String, @Query("api_key") apiKey: String,
+        @Query("language") languageCode: String,
+        @Query("query") query: String
+    ):
+            Call<ListResponse<MovieResponse>>
+
+    @Headers(Constant.REQUEST_HEADER_CONTENT_TYPE)
+    @GET
+    fun getTvShowsSearch(
+        @Url url: String, @Query("api_key") apiKey: String,
+        @Query("language") languageCode: String,
+        @Query("query") query: String
+    ):
+            Call<ListResponse<TvShowResponse>>
 }

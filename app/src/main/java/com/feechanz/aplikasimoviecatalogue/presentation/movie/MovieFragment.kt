@@ -3,6 +3,7 @@ package com.feechanz.aplikasimoviecatalogue.presentation.movie
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Menu
 import android.view.View
 import android.widget.SearchView
@@ -44,14 +45,42 @@ class MovieFragment : BaseFragment() {
             }
 
             override fun onQueryTextChange(pattern: String): Boolean {
-                filterMovies(pattern)
+                if(TextUtils.isEmpty(pattern)){
+                    queryAllMovies()
+                }else {
+                    queryMovies(pattern)
+                }
                 return true
             }
         })
     }
 
+    private fun queryAllMovies(){
+        showLoadingBar()
+        movieViewModel.getMovies(getString(R.string.language_code)).observe(this, Observer { movies ->
+            hideLoadingBar()
+            if (movies != null) {
+                adapter.addAll(movies)
+            }
+        })
+    }
+
+    private fun queryMovies(filter: String){
+        showLoadingBar()
+        movieViewModel.getMoviesQuery(getString(R.string.language_code), filter).observe(this,
+            Observer { movies ->
+                hideLoadingBar()
+                if (movies != null) {
+                    adapter.addAll(movies)
+                }
+            })
+    }
+
     private fun filterMovies(filter: String){
-        movieViewModel.getMoviesFiltered(filter).observe(this, Observer { movies ->
+        showLoadingBar()
+        movieViewModel.getMoviesQuery(getString(R.string.language_code), filter).observe(this,
+            Observer { movies ->
+                hideLoadingBar()
             if (movies != null) {
                 adapter.addAll(movies)
             }
@@ -85,7 +114,11 @@ class MovieFragment : BaseFragment() {
                     if(searchView!=null){
                         pattern = searchView?.query.toString()
                     }
-                    filterMovies(pattern)
+                    if(TextUtils.isEmpty(pattern)){
+                        adapter.addAll(movies)
+                    }else {
+                        filterMovies(pattern)
+                    }
                 }
             })
         movieViewModel.getErrorMessage().observe(this, Observer { errorMessage ->

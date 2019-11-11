@@ -16,16 +16,25 @@ import kotlinx.coroutines.launch
  */
 class MovieViewModel : ViewModel() {
     private var movies: MutableLiveData<List<MovieShow>>? = null
+    private var moviesQuery: MutableLiveData<List<MovieShow>>? = null
     private var errorMessage: MutableLiveData<String>? = null
     private var restApi: RestApi = RestApiImpl()
     private var moviesFiltered: MutableLiveData<List<MovieShow>>? = null
     
     fun getMovies(languageCode: String): LiveData<List<MovieShow>> {
-        if (movies == null) {
-            movies = MutableLiveData()
-            loadMovies(languageCode)
-        }
+
+        movies = MutableLiveData()
+        loadMovies(languageCode)
+
         return movies as MutableLiveData<List<MovieShow>>
+    }
+
+    fun getMoviesQuery(languageCode: String, query: String): LiveData<List<MovieShow>> {
+
+        moviesQuery = MutableLiveData()
+        loadMoviesQuery(languageCode, query)
+
+        return moviesQuery as MutableLiveData<List<MovieShow>>
     }
 
     fun getErrorMessage(): LiveData<String> {
@@ -59,6 +68,30 @@ class MovieViewModel : ViewModel() {
                         moviesResult.add(MovieShow.getInstance(m))
                     }
                     movies?.postValue(moviesResult)
+                }
+            } catch (ex: Exception) {
+                errorMessage?.postValue(ex.message)
+            }
+        }
+    }
+
+    private fun loadMoviesQuery(languageCode: String, query: String) {
+        errorMessage = null
+        val moviesResult = arrayListOf<MovieShow>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val showResponse = restApi.getMoviesSearch(
+                    Constant.getEndpointPath(Constant.GET_MOVIES_SEARCH),
+                    Constant.API_KEY,
+                    languageCode,
+                    query
+                )
+                if (showResponse.isSuccessful) {
+                    showResponse.body().results?.map { m ->
+                        moviesResult.add(MovieShow.getInstance(m))
+                    }
+                    moviesQuery?.postValue(moviesResult)
                 }
             } catch (ex: Exception) {
                 errorMessage?.postValue(ex.message)

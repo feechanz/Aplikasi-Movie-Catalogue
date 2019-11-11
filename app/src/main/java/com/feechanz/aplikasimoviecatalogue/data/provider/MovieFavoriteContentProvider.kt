@@ -12,6 +12,9 @@ import com.feechanz.aplikasimoviecatalogue.data.realm.LocalApi
 import com.feechanz.aplikasimoviecatalogue.data.realm.RealmDataSource
 import android.database.MatrixCursor
 import com.feechanz.aplikasimoviecatalogue.data.model.MovieShow
+import io.realm.Realm
+import io.realm.RealmConfiguration
+import java.lang.Exception
 
 
 class MovieFavoriteContentProvider : ContentProvider() {
@@ -32,6 +35,17 @@ class MovieFavoriteContentProvider : ContentProvider() {
 
     override fun onCreate(): Boolean {
         localApi = RealmDataSource()
+        try{
+            val realm = Realm.getDefaultInstance()
+            realm.close()
+        }catch (ex: Exception){
+            Realm.init(context)
+            val realmConfiguration = RealmConfiguration.Builder()
+                .build()
+
+            Realm.setDefaultConfiguration(realmConfiguration)
+        }
+
         return true
     }
 
@@ -54,6 +68,7 @@ class MovieFavoriteContentProvider : ContentProvider() {
                     )
                 )
                 val listMovie: ArrayList<MovieShow> = ArrayList(localApi.getMovieFavorites())
+
                 listMovie.addAll(localApi.getTvShowFavorites())
 
 

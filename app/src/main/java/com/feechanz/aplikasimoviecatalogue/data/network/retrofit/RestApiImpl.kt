@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit
  */
 class RestApiImpl : RestApi {
 
+
     private lateinit var apiService: RetrofitRestApi
 
     init {
@@ -36,10 +37,35 @@ class RestApiImpl : RestApi {
             Response<ListResponse<MovieResponse>> {
         return apiService.getMovies(url, apiKey, languageCode).execute()
     }
-
+    override fun getMoviesReleaseToday(
+        url: String,
+        apiKey: String,
+        todayDate: String,
+        todayDate2: String
+    ): Response<ListResponse<MovieResponse>> {
+        return apiService.getMoviesReleaseToday(url, apiKey, todayDate, todayDate2).execute()
+    }
     override fun getTvShows(url: String, apiKey: String, languageCode: String):
             Response<ListResponse<TvShowResponse>> {
         return apiService.getTvShows(url, apiKey, languageCode).execute()
+    }
+
+    override fun getMoviesSearch(
+        url: String,
+        apiKey: String,
+        languageCode: String,
+        query: String
+    ): Response<ListResponse<MovieResponse>> {
+        return apiService.getMoviesSearch(url, apiKey, languageCode, query).execute()
+    }
+
+    override fun getTvShowsSearch(
+        url: String,
+        apiKey: String,
+        languageCode: String,
+        query: String
+    ): Response<ListResponse<TvShowResponse>> {
+        return apiService.getTvShowsSearch(url, apiKey, languageCode, query).execute()
     }
 
     override fun getMovieDetail(

@@ -10,6 +10,7 @@ import com.feechanz.favoriteapp.R
 import com.feechanz.favoriteapp.model.MovieShow
 import com.feechanz.favoriteapp.utils.Constant
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 /**
  * Created by Feechan on 10/30/2019.
@@ -22,7 +23,11 @@ class MovieListViewAdapter : RecyclerView
     fun addAll(movies: List<MovieShow>) {
         this.movies.clear()
         this.movies.addAll(movies)
-        notifyDataSetChanged()
+        try {
+            notifyDataSetChanged()
+        }catch (ex: Exception){
+            ex.printStackTrace()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

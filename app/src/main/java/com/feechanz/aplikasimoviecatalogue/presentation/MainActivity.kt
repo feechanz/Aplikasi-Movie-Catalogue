@@ -57,6 +57,9 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId == R.id.action_change_settings) {
             val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(intent)
+        }else if(item.itemId == R.id.action_change_reminder){
+            val intent = Intent(this, ReminderPreferenceActivity::class.java)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }

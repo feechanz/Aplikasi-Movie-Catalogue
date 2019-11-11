@@ -7,6 +7,16 @@
     <string name="favorite">Favorite</string>
     <string name="search">Search</string>
 
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="release_reminder">Release Reminder</string>
+    <string name="daily_reminder_summary">Reminder for return to app everyday</string>
+    <string name="daily_reminder_message">Aplikasi Movie catalogue missing you!</string>
+    <string name="release_reminder_summary">Reminder showing the movies that released today</string>
+    <string name="release_today">Release Today</string>
+    <string name="no_release_today">No release for today</string>
+    <string name="release_fail_with_code">Release fail with code: </string>
+    <string name="release_error">Release error: </string>
+
     <string name="language_code">en-US</string>
 
     <string name="release_date">Release Date: %1$s</string>
@@ -14,6 +24,7 @@
     <string name="status">Status: %1$s</string>
     <string name="vote_average">Vote Average: %1$,.2f</string>
     <string name="change_language_settings">Change Language Settings</string>
+    <string name="change_reminder_setting">Change Reminder Settings</string>
     <string name="appwidget_text">Favorite Movie</string>
     <string name="add_widget">Add widget</string>
     <string name="empty_text">No Favorite</string>

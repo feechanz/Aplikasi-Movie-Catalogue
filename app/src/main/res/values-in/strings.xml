@@ -8,6 +8,16 @@
     <string name="favorite">Favorit</string>
     <string name="search">Cari</string>
 
+    <string name="daily_reminder">Pengingat Harian</string>
+    <string name="release_reminder">Pengingat Rilis</string>
+    <string name="daily_reminder_summary">Pengingat untuk kembali pada aplikasi tiap hari</string>
+    <string name="daily_reminder_message">Aplikasi Movie catalogue merindukanmu!</string>
+    <string name="release_reminder_summary">Pengingat untuk menampilkan film rilis hari ini</string>
+    <string name="release_today">Rilis Hari ini</string>
+    <string name="no_release_today">Hari ini tidak ada release</string>
+    <string name="release_fail_with_code">Release fail with code: </string>
+    <string name="release_error">Release error: </string>
+
     <string name="language_code">id-ID</string>
 
     <string name="release_date">Tanggal Peluncuran: %1$s</string>
@@ -15,6 +25,7 @@
     <string name="status">Keadaan: %1$s</string>
     <string name="vote_average">Rata-Rata Suara : %1$,.2f</string>
     <string name="change_language_settings">Ganti Pengaturan Bahasa</string>
+    <string name="change_reminder_setting">Ganti Pengaturan Pengingat</string>
     <string name="appwidget_text">Film Favorit</string>
     <string name="add_widget">Tambah widget</string>
     <string name="empty_text">Tidak ada Favorit</string>

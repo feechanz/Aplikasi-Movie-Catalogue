@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun showMovies(movies: List<MovieShow>) {
-        if(movies.size > 0) {
+        if(movies.isNotEmpty()) {
             adapter.addAll(movies)
         }else{
             Toast.makeText(this, "Daftar Favorite masih 0", Toast.LENGTH_SHORT).show()

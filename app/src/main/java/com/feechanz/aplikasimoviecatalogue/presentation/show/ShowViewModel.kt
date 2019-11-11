@@ -17,16 +17,24 @@ import kotlinx.coroutines.launch
 class ShowViewModel : ViewModel() {
 
     private var shows: MutableLiveData<List<MovieShow>>? = null
+    private var showsQuery: MutableLiveData<List<MovieShow>>? = null
     private var errorMessage: MutableLiveData<String>? = null
     private var restApi: RestApi = RestApiImpl()
     private var showsFiltered: MutableLiveData<List<MovieShow>>? = null
 
-    fun getMovies(languageCode: String): LiveData<List<MovieShow>> {
-        if (shows == null) {
-            shows = MutableLiveData()
-            loadShows(languageCode)
-        }
+    fun getShows(languageCode: String): LiveData<List<MovieShow>> {
+        shows = MutableLiveData()
+        loadShows(languageCode)
+
         return shows as MutableLiveData<List<MovieShow>>
+    }
+
+    fun getShowsQuery(languageCode: String, query: String): LiveData<List<MovieShow>> {
+
+        showsQuery = MutableLiveData()
+        loadShowsQuery(languageCode, query)
+
+        return showsQuery as MutableLiveData<List<MovieShow>>
     }
 
     fun getErrorMessage(): LiveData<String> {
@@ -42,6 +50,30 @@ class ShowViewModel : ViewModel() {
         loadShowsFiltered(pattern)
 
         return showsFiltered as MutableLiveData<List<MovieShow>>
+    }
+
+    private fun loadShowsQuery(languageCode: String, query: String) {
+        errorMessage = null
+        val moviesResult = arrayListOf<MovieShow>()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val showResponse = restApi.getTvShowsSearch(
+                    Constant.getEndpointPath(Constant.GET_TV_SHOW_SEARCH),
+                    Constant.API_KEY,
+                    languageCode,
+                    query
+                )
+                if (showResponse.isSuccessful) {
+                    showResponse.body().results?.map { m ->
+                        moviesResult.add(MovieShow.getInstance(m))
+                    }
+                    showsQuery?.postValue(moviesResult)
+                }
+            } catch (ex: Exception) {
+                errorMessage?.postValue(ex.message)
+            }
+        }
     }
 
     private fun loadShows(languageCode: String) {
