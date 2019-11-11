@@ -6,10 +6,10 @@
         android:key="daily_reminder_key"
         android:title="@string/daily_reminder"
         android:summary="@string/daily_reminder_summary"
-        android:defaultValue="false"/>
+        android:defaultValue="false" />
     <SwitchPreference
         android:key="release_reminder_key"
         android:title="@string/release_reminder"
         android:summary="@string/release_reminder_summary"
-        android:defaultValue="false"/>
+        android:defaultValue="false" />
 </PreferenceScreen>

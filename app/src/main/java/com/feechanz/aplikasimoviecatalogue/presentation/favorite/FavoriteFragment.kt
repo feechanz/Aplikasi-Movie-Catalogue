@@ -2,7 +2,6 @@ package com.feechanz.aplikasimoviecatalogue.presentation.favorite
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.feechanz.aplikasimoviecatalogue.R
@@ -38,8 +37,8 @@ class FavoriteFragment : BaseFragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        val item  =menu.findItem(R.id.search_view)
-        if(item !=null)
+        val item = menu.findItem(R.id.search_view)
+        if (item != null)
             item.isVisible = false
     }
 

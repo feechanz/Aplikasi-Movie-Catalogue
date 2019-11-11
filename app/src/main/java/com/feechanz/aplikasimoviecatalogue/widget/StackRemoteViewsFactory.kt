@@ -3,23 +3,22 @@ package com.feechanz.aplikasimoviecatalogue.widget
 import android.content.Context
 import android.content.Intent
 import android.os.Binder
-import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import androidx.core.os.bundleOf
+import com.bumptech.glide.Glide
+import com.feechanz.aplikasimoviecatalogue.R
 import com.feechanz.aplikasimoviecatalogue.data.model.MovieShow
 import com.feechanz.aplikasimoviecatalogue.data.realm.LocalApi
 import com.feechanz.aplikasimoviecatalogue.data.realm.RealmDataSource
-import com.bumptech.glide.Glide
-import com.feechanz.aplikasimoviecatalogue.R
 import com.feechanz.aplikasimoviecatalogue.utils.Constant
-import java.lang.Exception
 
 
 /**
  * Created by Feechan on 11/10/2019.
  */
-internal class StackRemoteViewsFactory(private val mContext: Context) : RemoteViewsService.RemoteViewsFactory {
+internal class StackRemoteViewsFactory(private val mContext: Context) :
+    RemoteViewsService.RemoteViewsFactory {
 
     private val localApi: LocalApi = RealmDataSource()
     private val movieShow = ArrayList<MovieShow>()
@@ -51,7 +50,7 @@ internal class StackRemoteViewsFactory(private val mContext: Context) : RemoteVi
 
     override fun hasStableIds(): Boolean = false
 
-    private fun setView(view: RemoteViews, position: Int){
+    private fun setView(view: RemoteViews, position: Int) {
         val movieShow = movieShow[position]
         try {
             val bitmap = Glide.with(mContext)
@@ -60,7 +59,7 @@ internal class StackRemoteViewsFactory(private val mContext: Context) : RemoteVi
                 .submit(512, 512)
                 .get()
             view.setImageViewBitmap(R.id.contentImageView, bitmap)
-        }catch (ex: Exception){
+        } catch (ex: Exception) {
             ex.printStackTrace()
         }
         view.setTextViewText(R.id.titleTextView, movieShow.title)

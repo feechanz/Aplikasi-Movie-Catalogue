@@ -39,15 +39,15 @@ class MovieFragment : BaseFragment() {
         super.onPrepareOptionsMenu(menu)
         searchView = (menu.findItem(R.id.search_view).actionView as SearchView?)
         searchView?.setOnQueryTextListener(object
-            : SearchView.OnQueryTextListener{
+            : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return true
             }
 
             override fun onQueryTextChange(pattern: String): Boolean {
-                if(TextUtils.isEmpty(pattern)){
+                if (TextUtils.isEmpty(pattern)) {
                     queryAllMovies()
-                }else {
+                } else {
                     queryMovies(pattern)
                 }
                 return true
@@ -55,17 +55,18 @@ class MovieFragment : BaseFragment() {
         })
     }
 
-    private fun queryAllMovies(){
+    private fun queryAllMovies() {
         showLoadingBar()
-        movieViewModel.getMovies(getString(R.string.language_code)).observe(this, Observer { movies ->
-            hideLoadingBar()
-            if (movies != null) {
-                adapter.addAll(movies)
-            }
-        })
+        movieViewModel.getMovies(getString(R.string.language_code))
+            .observe(this, Observer { movies ->
+                hideLoadingBar()
+                if (movies != null) {
+                    adapter.addAll(movies)
+                }
+            })
     }
 
-    private fun queryMovies(filter: String){
+    private fun queryMovies(filter: String) {
         showLoadingBar()
         movieViewModel.getMoviesQuery(getString(R.string.language_code), filter).observe(this,
             Observer { movies ->
@@ -76,15 +77,15 @@ class MovieFragment : BaseFragment() {
             })
     }
 
-    private fun filterMovies(filter: String){
+    private fun filterMovies(filter: String) {
         showLoadingBar()
         movieViewModel.getMoviesQuery(getString(R.string.language_code), filter).observe(this,
             Observer { movies ->
                 hideLoadingBar()
-            if (movies != null) {
-                adapter.addAll(movies)
-            }
-        })
+                if (movies != null) {
+                    adapter.addAll(movies)
+                }
+            })
     }
 
     override fun getContentView(): Int {
@@ -111,12 +112,12 @@ class MovieFragment : BaseFragment() {
                 hideLoadingBar()
                 if (movies != null) {
                     var pattern: String = ""
-                    if(searchView!=null){
+                    if (searchView != null) {
                         pattern = searchView?.query.toString()
                     }
-                    if(TextUtils.isEmpty(pattern)){
+                    if (TextUtils.isEmpty(pattern)) {
                         adapter.addAll(movies)
-                    }else {
+                    } else {
                         filterMovies(pattern)
                     }
                 }

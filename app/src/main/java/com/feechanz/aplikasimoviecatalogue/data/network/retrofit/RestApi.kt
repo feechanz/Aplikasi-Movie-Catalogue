@@ -10,7 +10,7 @@ interface RestApi {
     fun getMovies(url: String, apiKey: String, languageCode: String):
             Response<ListResponse<MovieResponse>>
 
-    fun getMoviesReleaseToday(url: String, apiKey: String, todayDate: String, todayDate2:String):
+    fun getMoviesReleaseToday(url: String, apiKey: String, todayDate: String, todayDate2: String):
             Response<ListResponse<MovieResponse>>
 
     fun getTvShows(url: String, apiKey: String, languageCode: String):

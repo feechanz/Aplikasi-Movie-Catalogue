@@ -39,15 +39,15 @@ class ShowFragment : BaseFragment() {
         super.onPrepareOptionsMenu(menu)
         searchView = (menu.findItem(R.id.search_view).actionView as SearchView?)
         searchView?.setOnQueryTextListener(object
-            : SearchView.OnQueryTextListener{
+            : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return true
             }
 
             override fun onQueryTextChange(pattern: String): Boolean {
-                if(TextUtils.isEmpty(pattern)){
+                if (TextUtils.isEmpty(pattern)) {
                     queryAllShow()
-                }else {
+                } else {
                     queryShows(pattern)
                 }
                 return true
@@ -55,7 +55,7 @@ class ShowFragment : BaseFragment() {
         })
     }
 
-    private fun queryAllShow(){
+    private fun queryAllShow() {
         showLoadingBar()
         showViewModel.getShows(getString(R.string.language_code)).observe(this, Observer { shows ->
             hideLoadingBar()
@@ -65,15 +65,15 @@ class ShowFragment : BaseFragment() {
         })
     }
 
-    private fun queryShows(filter: String){
+    private fun queryShows(filter: String) {
         showLoadingBar()
         showViewModel.getShowsQuery(getString(R.string.language_code), filter).observe(this,
             Observer { shows ->
                 hideLoadingBar()
-            if (shows != null) {
-                adapter.addAll(shows)
-            }
-        })
+                if (shows != null) {
+                    adapter.addAll(shows)
+                }
+            })
     }
 
     override fun getContentView(): Int {
@@ -99,12 +99,12 @@ class ShowFragment : BaseFragment() {
             hideLoadingBar()
             if (shows != null) {
                 var pattern: String = ""
-                if(searchView!=null){
+                if (searchView != null) {
                     pattern = searchView?.query.toString()
                 }
-                if(TextUtils.isEmpty(pattern)){
+                if (TextUtils.isEmpty(pattern)) {
                     adapter.addAll(shows)
-                }else {
+                } else {
                     queryShows(pattern)
                 }
             }

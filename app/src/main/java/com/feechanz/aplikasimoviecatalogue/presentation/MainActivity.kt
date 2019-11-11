@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         notifyWidget()
     }
 
-    private fun notifyWidget(){
+    private fun notifyWidget() {
         val appWidgetManager = AppWidgetManager.getInstance(this)
         val appWidgetIds = appWidgetManager.getAppWidgetIds(
             ComponentName(this, FavoriteMovieWidget::class.java)
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId == R.id.action_change_settings) {
             val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(intent)
-        }else if(item.itemId == R.id.action_change_reminder){
+        } else if (item.itemId == R.id.action_change_reminder) {
             val intent = Intent(this, ReminderPreferenceActivity::class.java)
             startActivity(intent)
         }

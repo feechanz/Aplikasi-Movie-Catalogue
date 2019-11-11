@@ -38,22 +38,28 @@ class AlarmReceiver : BroadcastReceiver() {
             context.getString(
                 R.string.daily_reminder
             )
-        }else{
+        } else {
             context.getString(
                 R.string.release_reminder
             )
         }
-        val notifId = if (type.equals(TYPE_DAILY_REMINDER, ignoreCase = true)) ID_DAILY_REMINDER else ID_RELEASE_REMINDER
-        if(notifId == ID_DAILY_REMINDER) {
+        val notifId = if (type.equals(
+                TYPE_DAILY_REMINDER,
+                ignoreCase = true
+            )
+        ) ID_DAILY_REMINDER else ID_RELEASE_REMINDER
+        if (notifId == ID_DAILY_REMINDER) {
             showAlarmNotification(context, title, message, notifId)
-        }else{
+        } else {
             showReleaseTodayReminder(context, title, notifId)
         }
     }
 
-    private fun showReleaseTodayReminder(context: Context, title:String,
-                                         notifId:Int){
-        val restApi:RestApi = RestApiImpl()
+    private fun showReleaseTodayReminder(
+        context: Context, title: String,
+        notifId: Int
+    ) {
+        val restApi: RestApi = RestApiImpl()
         var message = ""
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -67,21 +73,22 @@ class AlarmReceiver : BroadcastReceiver() {
                     todayDate
                 )
                 if (movieResponses.isSuccessful) {
-                    message = context.getString(R.string.release_today) +": "
+                    message = context.getString(R.string.release_today) + ": "
                     movieResponses.body().results?.map { m ->
                         val mov = MovieShow.getInstance(m)
                         message += mov.title + ", "
                     }
-                    if(movieResponses.body().results == null ||
-                        movieResponses.body().results!!.isEmpty()){
+                    if (movieResponses.body().results == null ||
+                        movieResponses.body().results!!.isEmpty()
+                    ) {
                         message = context.getString(R.string.no_release_today)
                     }
-                }else{
+                } else {
                     message = context.getString(R.string.release_fail_with_code) + movieResponses
                         .code()
                 }
             } catch (ex: Exception) {
-                message = context.getString(R.string.release_error)+ex.message
+                message = context.getString(R.string.release_error) + ex.message
             }
 
             showAlarmNotification(context, title, message, notifId)
@@ -89,10 +96,16 @@ class AlarmReceiver : BroadcastReceiver() {
 
     }
 
-    private fun showAlarmNotification(context: Context, title:String, message:String, notifId: Int){
+    private fun showAlarmNotification(
+        context: Context,
+        title: String,
+        message: String,
+        notifId: Int
+    ) {
         val CHANNEL_ID = "Channel_1"
         val CHANNEL_NAME = "AlarmManager channel"
-        val notificationManagerCompat = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManagerCompat =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_movie_black)
@@ -102,9 +115,11 @@ class AlarmReceiver : BroadcastReceiver() {
             .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
             .setSound(alarmSound)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID,
+            val channel = NotificationChannel(
+                CHANNEL_ID,
                 CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT)
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
             channel.enableVibration(true)
             channel.vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
             builder.setChannelId(CHANNEL_ID)

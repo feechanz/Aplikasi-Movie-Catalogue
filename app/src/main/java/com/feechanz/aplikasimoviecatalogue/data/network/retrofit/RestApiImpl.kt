@@ -37,6 +37,7 @@ class RestApiImpl : RestApi {
             Response<ListResponse<MovieResponse>> {
         return apiService.getMovies(url, apiKey, languageCode).execute()
     }
+
     override fun getMoviesReleaseToday(
         url: String,
         apiKey: String,
@@ -45,6 +46,7 @@ class RestApiImpl : RestApi {
     ): Response<ListResponse<MovieResponse>> {
         return apiService.getMoviesReleaseToday(url, apiKey, todayDate, todayDate2).execute()
     }
+
     override fun getTvShows(url: String, apiKey: String, languageCode: String):
             Response<ListResponse<TvShowResponse>> {
         return apiService.getTvShows(url, apiKey, languageCode).execute()

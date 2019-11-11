@@ -1,5 +1,7 @@
 package com.feechanz.aplikasimoviecatalogue.presentation.detail
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,11 +16,9 @@ import com.feechanz.aplikasimoviecatalogue.R
 import com.feechanz.aplikasimoviecatalogue.data.model.MovieShow
 import com.feechanz.aplikasimoviecatalogue.data.model.MovieShowDetail
 import com.feechanz.aplikasimoviecatalogue.utils.Constant
+import com.feechanz.aplikasimoviecatalogue.widget.FavoriteMovieWidget
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
-import android.content.ComponentName
-import android.appwidget.AppWidgetManager
-import com.feechanz.aplikasimoviecatalogue.widget.FavoriteMovieWidget
 
 
 class MovieDetailActivity : AppCompatActivity() {
@@ -124,7 +124,7 @@ class MovieDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun notifyWidget(){
+    private fun notifyWidget() {
         val appWidgetManager = AppWidgetManager.getInstance(this)
         val appWidgetIds = appWidgetManager.getAppWidgetIds(
             ComponentName(this, FavoriteMovieWidget::class.java)

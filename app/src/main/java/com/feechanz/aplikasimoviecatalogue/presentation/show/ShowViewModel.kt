@@ -44,7 +44,7 @@ class ShowViewModel : ViewModel() {
         return errorMessage as MutableLiveData<String>
     }
 
-    fun getShowsFiltered(pattern: String): LiveData<List<MovieShow>>{
+    fun getShowsFiltered(pattern: String): LiveData<List<MovieShow>> {
 
         showsFiltered = MutableLiveData()
         loadShowsFiltered(pattern)
@@ -102,8 +102,8 @@ class ShowViewModel : ViewModel() {
     private fun loadShowsFiltered(pattern: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val result = ArrayList<MovieShow>()
-            shows?.value?.map {m ->
-                if(m.title!!.toLowerCase().contains(pattern.toLowerCase()))
+            shows?.value?.map { m ->
+                if (m.title!!.toLowerCase().contains(pattern.toLowerCase()))
                     result.add(m)
             }
             showsFiltered?.postValue(result)

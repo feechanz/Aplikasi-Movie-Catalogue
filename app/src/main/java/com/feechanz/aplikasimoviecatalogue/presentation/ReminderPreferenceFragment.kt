@@ -22,7 +22,8 @@ import java.util.*
 /**
  * Created by Feechan on 11/11/2019.
  */
-class ReminderPreferenceFragment: PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener{
+class ReminderPreferenceFragment : PreferenceFragmentCompat(),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     private val DAILY_REMINDER_KEY = "daily_reminder_key"
@@ -33,32 +34,46 @@ class ReminderPreferenceFragment: PreferenceFragmentCompat(), SharedPreferences.
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
-        if(key.equals(DAILY_REMINDER_KEY)){
+        if (key.equals(DAILY_REMINDER_KEY)) {
             val daily = sharedPreferences.getBoolean(DAILY_REMINDER_KEY, false)
-            Log.d("chanz","Daily reminder key = "+ daily)
-            if(daily){
-                setRepeatingAlarm(context!!, TYPE_DAILY_REMINDER, getString(R.string
-                    .daily_reminder_message), 7, ID_DAILY_REMINDER, getString(R.string
-                    .daily_reminder))
-            }else{
+            Log.d("chanz", "Daily reminder key = " + daily)
+            if (daily) {
+                setRepeatingAlarm(
+                    context!!, TYPE_DAILY_REMINDER, getString(
+                        R.string
+                            .daily_reminder_message
+                    ), 7, ID_DAILY_REMINDER, getString(
+                        R.string
+                            .daily_reminder
+                    )
+                )
+            } else {
                 cancelAlarm(context!!, getString(R.string.daily_reminder), ID_DAILY_REMINDER)
             }
-        }else if(key.equals(RELEASE_REMINDER_KEY)){
+        } else if (key.equals(RELEASE_REMINDER_KEY)) {
             val release = sharedPreferences.getBoolean(RELEASE_REMINDER_KEY, false)
-            Log.d("release","Release reminder key = "+ release)
-            if(release){
-                setRepeatingAlarm(context!!, TYPE_RELEASE_REMINDER, getString(R.string
-                    .release_reminder), 8, ID_RELEASE_REMINDER, getString(R.string
-                    .release_reminder))
-            }else{
+            Log.d("release", "Release reminder key = " + release)
+            if (release) {
+                setRepeatingAlarm(
+                    context!!, TYPE_RELEASE_REMINDER, getString(
+                        R.string
+                            .release_reminder
+                    ), 8, ID_RELEASE_REMINDER, getString(
+                        R.string
+                            .release_reminder
+                    )
+                )
+            } else {
                 cancelAlarm(context!!, getString(R.string.release_reminder), ID_RELEASE_REMINDER)
             }
         }
     }
 
-    fun setRepeatingAlarm(context: Context,
-                          type: String, message: String,
-                          hour: Int, idRepeating:Int, reminder:String) {
+    fun setRepeatingAlarm(
+        context: Context,
+        type: String, message: String,
+        hour: Int, idRepeating: Int, reminder: String
+    ) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
         intent.putExtra(EXTRA_MESSAGE, message)
@@ -69,11 +84,16 @@ class ReminderPreferenceFragment: PreferenceFragmentCompat(), SharedPreferences.
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
         val pendingIntent = PendingIntent.getBroadcast(context, idRepeating, intent, 0)
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
         Toast.makeText(context, reminder + " set up!", Toast.LENGTH_SHORT).show()
     }
 
-    fun cancelAlarm(context: Context, reminder:String, idRepeating: Int) {
+    fun cancelAlarm(context: Context, reminder: String, idRepeating: Int) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(context, idRepeating, intent, 0)

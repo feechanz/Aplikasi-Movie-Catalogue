@@ -5,16 +5,15 @@ import android.content.ContentUris
 import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
+import android.database.MatrixCursor
 import android.net.Uri
+import com.feechanz.aplikasimoviecatalogue.data.model.MovieShow
 import com.feechanz.aplikasimoviecatalogue.data.provider.ContentProviderContract.AUTHORITY
 import com.feechanz.aplikasimoviecatalogue.data.provider.ContentProviderContract.BASE_PATH
 import com.feechanz.aplikasimoviecatalogue.data.realm.LocalApi
 import com.feechanz.aplikasimoviecatalogue.data.realm.RealmDataSource
-import android.database.MatrixCursor
-import com.feechanz.aplikasimoviecatalogue.data.model.MovieShow
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import java.lang.Exception
 
 
 class MovieFavoriteContentProvider : ContentProvider() {
@@ -35,10 +34,10 @@ class MovieFavoriteContentProvider : ContentProvider() {
 
     override fun onCreate(): Boolean {
         localApi = RealmDataSource()
-        try{
+        try {
             val realm = Realm.getDefaultInstance()
             realm.close()
-        }catch (ex: Exception){
+        } catch (ex: Exception) {
             Realm.init(context)
             val realmConfiguration = RealmConfiguration.Builder()
                 .build()
@@ -54,8 +53,8 @@ class MovieFavoriteContentProvider : ContentProvider() {
         selectionArgs: Array<String>?, sortOrder: String?
     ): Cursor? {
         var cursor: Cursor? = null
-        when(uriMatcher.match(uri)){
-            MOVIES ->  {
+        when (uriMatcher.match(uri)) {
+            MOVIES -> {
                 val myCursor = MatrixCursor(
                     arrayOf(
                         ContentProviderContract.MOVIE_ID_COLUMN,
@@ -72,9 +71,9 @@ class MovieFavoriteContentProvider : ContentProvider() {
                 listMovie.addAll(localApi.getTvShowFavorites())
 
 
-                listMovie.map {m ->
+                listMovie.map { m ->
                     var isMovieInt = 0
-                    if(m.isMovie){
+                    if (m.isMovie) {
                         isMovieInt = 1
                     }
                     val rowData = arrayOf(
@@ -91,7 +90,7 @@ class MovieFavoriteContentProvider : ContentProvider() {
 
                 cursor = myCursor
             }
-            MOVIES_ID ->  cursor = null
+            MOVIES_ID -> cursor = null
             else -> cursor = null
         }
         return cursor

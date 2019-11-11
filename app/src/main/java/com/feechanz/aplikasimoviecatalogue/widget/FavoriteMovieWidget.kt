@@ -14,7 +14,7 @@ import com.feechanz.aplikasimoviecatalogue.R
  * Implementation of App Widget functionality.
  */
 class FavoriteMovieWidget : AppWidgetProvider() {
-    companion object{
+    companion object {
         private const val TOAST_ACTION = "com.feechanz.aplikasimoviecatalogue.TOAST_ACTION"
         const val EXTRA_ITEM = "com.feechanz.aplikasimoviecatalogue.EXTRA_ITEM"
 
@@ -26,7 +26,8 @@ class FavoriteMovieWidget : AppWidgetProvider() {
             val intent = Intent(context, StackWidgetService::class.java)
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
             intent.data = intent.toUri(Intent.URI_INTENT_SCHEME).toUri()
-            val views = RemoteViews(context.packageName,
+            val views = RemoteViews(
+                context.packageName,
                 R.layout.favorite_movie_widget
             )
             views.setRemoteAdapter(R.id.movieStackView, intent)
@@ -39,13 +40,19 @@ class FavoriteMovieWidget : AppWidgetProvider() {
             toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
 
             intent.data = intent.toUri(Intent.URI_INTENT_SCHEME).toUri()
-            val toastPendingIntent = PendingIntent.getBroadcast(context, 0, toastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            val toastPendingIntent = PendingIntent.getBroadcast(
+                context,
+                0,
+                toastIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
             views.setPendingIntentTemplate(R.id.movieStackView, toastPendingIntent)
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.movieStackView)
         }
     }
+
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,

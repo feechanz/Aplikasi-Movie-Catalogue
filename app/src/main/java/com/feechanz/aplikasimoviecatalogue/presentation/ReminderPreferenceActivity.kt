@@ -8,14 +8,15 @@ import com.feechanz.aplikasimoviecatalogue.R
  * Created by Feechan on 11/11/2019.
  */
 
-class ReminderPreferenceActivity : AppCompatActivity(){
+class ReminderPreferenceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reminder_preference)
         title = getString(R.string.change_reminder_setting)
 
-        supportFragmentManager.beginTransaction().add(R.id.setting_holder, ReminderPreferenceFragment()).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.setting_holder, ReminderPreferenceFragment()).commit()
     }
 
 }
